@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Keluarga extends Model
+class KeluargaKk extends Model
 {
     use HasFactory;
 
     protected $table = 'keluarga_kk';
     protected $primaryKey = 'kk_id';
+    public $timestamps = true;
 
     protected $fillable = [
         'kk_nomor',
-        'kepala_keluarga_warga_id',
+        'kepala_keluarga',
         'alamat',
         'rt',
-        'rw'
+        'rw',
     ];
 }

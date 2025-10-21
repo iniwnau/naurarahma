@@ -9,12 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('keluarga_kk', function (Blueprint $table) {
-            $table->id('kk_id');                     // PK
-            $table->string('kk_nomor')->unique();    // Nomor KK unik
-            $table->unsignedBigInteger('kepala_keluarga_warga_id');  // FK ke warga (bisa nanti)
-            $table->string('alamat');
-            $table->string('rt', 5);
-            $table->string('rw', 5);
+            $table->increments('kk_id');              // Primary key
+            $table->string('kk_nomor')->unique();    // Nomor KK
+            $table->string('kepala_keluarga');       // Kepala keluarga
+            $table->string('alamat');                // Alamat
+            $table->string('rt');                    // RT
+            $table->string('rw');                    // RW
             $table->timestamps();
         });
     }
@@ -24,3 +24,6 @@ return new class extends Migration
         Schema::dropIfExists('keluarga_kk');
     }
 };
+
+
+

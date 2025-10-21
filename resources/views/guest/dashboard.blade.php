@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +13,6 @@
         type="image/x-icon" />
     <link rel="stylesheet" href="{{ asset('assets-guest/css/animate.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets-guest/src/css/tailwind.css') }}" />
-
     <!-- ==== WOW JS ==== -->
     <script src="{{ asset('assets-guest/js/wow.min.js') }}"></script>
     <script>
@@ -26,14 +26,14 @@
         class="absolute top-0 left-0 z-40 flex items-center w-full bg-transparent ud-header">
         <div class="container mx-auto px-4">
             <div class="relative flex items-center justify-between -mx-4">
-                <div class="max-w-full px-4 w-60">
+                <div class="max-w-full px-4 w-20">
                     <a href="index.html" class="block w-full py-5 navbar-logo">
                         <img
-                            src="assets/images/logo/logo.svg"
+                            src="assets-guest/images/logo/binadesa.png"
                             alt="logo"
                             class="w-full dark:hidden" />
                         <img
-                            src="assets/images/logo/logo-white.svg"
+                            src="assets-guest/images/logo/binadesa.png"
                             alt="logo"
                             class="hidden w-full dark:block" />
                     </a>
@@ -55,107 +55,40 @@
                             class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6">
                             <ul class="blcok lg:flex 2xl:ml-20">
                                 <li class="relative group">
-                                    <a
-                                        href="index.html#home"
+                                    <a href="{{ route('kependudukan.index') }}"
                                         class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6">
-                                        Home
+                                        Keluarga KK
                                     </a>
                                 </li>
                                 <li class="relative group">
-                                    <a
-                                        href="index.html#about"
-                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6 xl:ml-10">
-                                        About
+                                    <a href="{{ route('warga.index') }}"
+                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6">
+                                        Data Warga
                                     </a>
                                 </li>
                                 <li class="relative group">
-                                    <a
-                                        href="index.html#pricing"
-                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6 xl:ml-10">
-                                        Pricing
+                                    <a href="{{ route('kependudukan.index') }}"
+                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6">
+                                        Anggota Keluarga
                                     </a>
                                 </li>
                                 <li class="relative group">
-                                    <a
-                                        href="index.html#team"
-                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6 xl:ml-10">
-                                        Team
+                                    <a href="{{ route('kependudukan.index') }}"
+                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6">
+                                        Data Kelahiran
                                     </a>
                                 </li>
                                 <li class="relative group">
-                                    <a
-                                        href="index.html#contact"
-                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6 xl:ml-10">
-                                        Contact
+                                    <a href="{{ route('kependudukan.index') }}"
+                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6">
+                                        Data Kematian
                                     </a>
                                 </li>
                                 <li class="relative group">
-                                    <a
-                                        href="blog-grids.html"
-                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:ml-7 lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6 xl:ml-10">
-                                        Blog
+                                    <a href="{{ route('kependudukan.index') }}"
+                                        class="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-body-color dark:lg:text-dark-6">
+                                        Data Pindah
                                     </a>
-                                </li>
-                                <li class="relative submenu-item group">
-                                    <a
-                                        href="javascript:void(0)"
-                                        class="relative flex items-center justify-between py-2 mx-8 text-base font-medium text-primary group-hover:text-primary lg:ml-8 lg:mr-0 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 xl:ml-10">
-                                        Pages
-
-                                        <svg
-                                            class="ml-2 fill-current"
-                                            width="16"
-                                            height="20"
-                                            viewBox="0 0 16 20"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7.99999 14.9C7.84999 14.9 7.72499 14.85 7.59999 14.75L1.84999 9.10005C1.62499 8.87505 1.62499 8.52505 1.84999 8.30005C2.07499 8.07505 2.42499 8.07505 2.64999 8.30005L7.99999 13.525L13.35 8.25005C13.575 8.02505 13.925 8.02505 14.15 8.25005C14.375 8.47505 14.375 8.82505 14.15 9.05005L8.39999 14.7C8.27499 14.825 8.14999 14.9 7.99999 14.9Z" />
-                                        </svg>
-                                    </a>
-                                    <div
-                                        class="submenu relative left-0 top-full hidden w-[250px] rounded-xs bg-white p-4 transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full">
-                                        <a
-                                            href="about.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-primary hover:text-primary dark:hover:text-primary">
-                                            About Page
-                                        </a>
-                                        <a
-                                            href="pricing.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            Pricing Page
-                                        </a>
-                                        <a
-                                            href="contact.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            Contact Page
-                                        </a>
-                                        <a
-                                            href="blog-grids.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            Blog Grid Page
-                                        </a>
-                                        <a
-                                            href="blog-details.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            Blog Details Page
-                                        </a>
-                                        <a
-                                            href="signup.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            Sign Up Page
-                                        </a>
-                                        <a
-                                            href="signin.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            Sign In Page
-                                        </a>
-                                        <a
-                                            href="404.html"
-                                            class="block rounded-sm px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary">
-                                            404 Page
-                                        </a>
-                                    </div>
                                 </li>
                             </ul>
                         </nav>
@@ -238,6 +171,11 @@
     </div>
     <!-- ====== Navbar Section End -->
 
+    <main class="min-h-screen bg-gray-50">
+        @yield('content')
+    </main>
+
+
     <!-- ====== Banner Section Start -->
     <div
         class="relative z-10 overflow-hidden pb-[60px] pt-[120px] dark:bg-dark md:pt-[130px] lg:pt-[160px]">
@@ -249,29 +187,11 @@
                     <div class="text-center">
                         <h1
                             class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px] md:leading-[1.2]">
-                            About Us Page
+                            Data Kependudukan
                         </h1>
                         <p class="mb-5 text-base text-body-color dark:text-dark-6">
-                            There are many variations of passages of Lorem Ipsum available.
+                            Data dasar kependudukan
                         </p>
-
-                        <ul class="flex items-center justify-center gap-[10px]">
-                            <li>
-                                <a
-                                    href="index.html"
-                                    class="flex items-center gap-[10px] text-base font-medium text-dark dark:text-white">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript:void(0)"
-                                    class="flex items-center gap-[10px] text-base font-medium text-body-color dark:text-dark-6">
-                                    <span class="text-body-color dark:text-dark-6"> / </span>
-                                    About us
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -1186,7 +1106,7 @@
                             href="javascript:void(0)"
                             class="mb-6 inline-block max-w-[160px]">
                             <img
-                                src="assets/images/logo/logo-white.svg"
+                                src="assets-guest/images/logo/binadesa.png"
                                 alt="logo"
                                 class="max-w-full" />
                         </a>
@@ -1267,13 +1187,6 @@
                                     href="javascript:void(0)"
                                     class="inline-block mb-3 text-base text-gray-7 hover:text-primary">
                                     Home
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="javascript:void(0)"
-                                    class="inline-block mb-3 text-base text-gray-7 hover:text-primary">
-                                    Features
                                 </a>
                             </li>
                             <li>
