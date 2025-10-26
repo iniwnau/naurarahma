@@ -9,32 +9,24 @@ class WargaController extends Controller
 {
     public function index()
     {
-        $warga = Warga::all();
+        $warga = Warga::latest()->get();
         return view('guest.warga.index', compact('warga'));
     }
 
     public function create()
     {
-        $warga = Warga::all();
-
-        // Kirim ke view
-        return view('guest.warga.create', compact('warga'));
+        return view('guest.warga.create');
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'no_ktp' => 'required|unique:warga,no_ktp',
             'nama' => 'required',
-            'jenis_kelamin' => 'required',
-            'agama' => 'required',
-            'pekerjaan' => 'required',
-            'telp' => 'nullable',
-            'email' => 'nullable|email',
+            'jenis_kelamin' => 'required'
         ]);
 
-        Warga::create($validated);
-
+        Warga::create($request->all());
         return redirect()->route('warga.index')->with('success', 'Data warga berhasil ditambahkan!');
     }
 
@@ -47,27 +39,19 @@ class WargaController extends Controller
     public function update(Request $request, $id)
     {
         $warga = Warga::findOrFail($id);
-
-        $validated = $request->validate([
-            'no_ktp' => 'required|unique:warga,no_ktp,' . $id . ',warga_id',
+        $request->validate([
+            'no_ktp' => 'required|unique:warga,no_ktp,' . $warga->warga_id . ',warga_id',
             'nama' => 'required',
-            'jenis_kelamin' => 'required',
-            'agama' => 'required',
-            'pekerjaan' => 'required',
-            'telp' => 'nullable',
-            'email' => 'nullable|email',
+            'jenis_kelamin' => 'required'
         ]);
 
-        $warga->update($validated);
-
+        $warga->update($request->all());
         return redirect()->route('warga.index')->with('success', 'Data warga berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
-        $warga = Warga::findOrFail($id);
-        $warga->delete();
-
+        Warga::findOrFail($id)->delete();
         return redirect()->route('warga.index')->with('success', 'Data warga berhasil dihapus!');
     }
 }

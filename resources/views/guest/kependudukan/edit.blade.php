@@ -1,60 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data KK</title>
-    <link rel="stylesheet" href="{{ asset('assets-guest/src/css/tailwind.css') }}">
-</head>
-<body class="bg-gray-50">
-    <main class="min-h-screen bg-gray-50 pt-24 pb-12 px-4">
-        <div class="container mx-auto">
-            <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-2xl font-semibold text-primary">Edit Data KK</h2>
-                    <a href="{{ route('kependudukan.index') }}" class="text-blue-600 hover:underline text-sm">
-                        ← Kembali ke Data KK
-                    </a>
-                </div>
+@extends('guest.layout')
 
-                <form action="{{ route('kependudukan.update', $kk->kk_id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium">Nomor KK</label>
-                            <input type="text" name="kk_nomor" value="{{ old('kk_nomor', $kk->kk_nomor) }}" class="mt-1 w-full border-gray-300 rounded-md" required>
-                            @error('kk_nomor') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
-                        </div>
+@section('content')
+<div class="container py-5">
+  <h2 class="text-center mb-4 text-primary fw-bold">Edit Data Keluarga</h2>
 
-                        <div>
-                            <label class="block text-sm font-medium">Kepala Keluarga</label>
-                            <select name="kepala_keluarga_warga_id" class="mt-1 w-full border-gray-300 rounded-md" required>
-                        </div>
+  @if($errors->any())
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        @foreach($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
 
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium">Alamat</label>
-                            <input type="text" name="alamat" value="{{ old('alamat', $kk->alamat) }}" class="mt-1 w-full border-gray-300 rounded-md" required>
-                        </div>
+  <form action="{{ route('keluarga.update', $keluarga->kk_id) }}" method="POST" class="card shadow p-4 border-0 rounded-4">
+    @csrf
+    @method('PUT')
 
-                        <div>
-                            <label class="block text-sm font-medium">RT</label>
-                            <input type="text" name="rt" value="{{ old('rt', $kk->rt) }}" class="mt-1 w-full border-gray-300 rounded-md" required>
-                        </div>
+    <div class="mb-3">
+      <label class="form-label">Nomor KK</label>
+      <input type="text" name="kk_nomor" class="form-control" value="{{ old('kk_nomor', $keluarga->kk_nomor) }}">
+    </div>
 
-                        <div>
-                            <label class="block text-sm font-medium">RW</label>
-                            <input type="text" name="rw" value="{{ old('rw', $kk->rw) }}" class="mt-1 w-full border-gray-300 rounded-md" required>
-                        </div>
-                    </div>
+    <div class="mb-3">
+      <label class="form-label">Kepala Keluarga</label>
+      <select name="kepala_keluarga_warga_id" class="form-select">
+        @foreach($warga as $w)
+          <option value="{{ $w->warga_id }}" {{ $keluarga->kepala_keluarga_warga_id == $w->warga_id ? 'selected' : '' }}>
+            {{ $w->nama }}
+          </option>
+        @endforeach
+      </select>
+    </div>
 
-                    <button type="submit" class="mt-6 px-6 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
-                        Update Data
-                    </button>
-                </form>
-            </div>
-        </div>
-    </main>
-    @endsection
-</body>
-</html>
+    <div class="mb-3">
+      <label class="form-label">Alamat</label>
+      <input type="text" name="alamat" class="form-control" value="{{ old('alamat', $keluarga->alamat) }}">
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">RT</label>
+        <input type="text" name="rt" class="form-control" value="{{ old('rt', $keluarga->rt) }}">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">RW</label>
+        <input type="text" name="rw" class="form-control" value="{{ old('rw', $keluarga->rw) }}">
+      </div>
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-warning">Perbarui</button>
+      <a href="{{ route('keluarga.index') }}" class="btn btn-secondary">Kembali</a>
+    </div>
+  </form>
+</div>
+@endsection

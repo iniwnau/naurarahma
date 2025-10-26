@@ -20,6 +20,11 @@ class Warga extends Model
         'agama',
         'pekerjaan',
         'telp',
-        'email',
+        'email'
     ];
+
+    public function keluarga()
+    {
+        return $this->hasMany(KeluargaKk::class, 'kepala_keluarga_warga_id');
+    }
 }

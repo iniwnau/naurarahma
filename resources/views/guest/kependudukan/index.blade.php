@@ -1,179 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('guest.layout')
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Keluarga KK</title>
-  <link rel="stylesheet" href="{{ asset('assets-guest/src/css/tailwind.css') }}">
-</head>
+@section('content')
+<div class="container py-5">
+  <h2 class="text-center mb-4 fw-bold text-success">
+    <i class="bi bi-house-door"></i> Data Kependudukan (Keluarga KK)
+  </h2>
 
-<body class="bg-gray-50 flex flex-col min-h-screen">
-  @extends('guest.dashboard')
+  {{-- Flash message --}}
+  @if (session('success'))
+  <div class="alert alert-success text-center">
+    {{ session('success') }}
+  </div>
+  @endif
 
-  @section('content')
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
+  {{-- Tombol tambah --}}
+  <div class="text-end mb-4">
+    <a href="{{ route('kependudukan.create') }}" class="btn btn-success">
+      <i class="bi bi-plus-circle"></i> Tambah Data KK
+    </a>
+  </div>
 
-    .center-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 100px;
-      text-align: center;
-    }
-
-    .card {
-      max-width: 1100px;
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-body {
-      padding: 30px;
-    }
-
-    .table-container {
-      width: 100%;
-      margin: 30px auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-      font-size: 15px;
-      text-align: left;
-    }
-
-    table th,
-    table td {
-      border: 1px solid #e5e5e5;
-      padding: 10px 12px;
-    }
-
-    table th {
-      background-color: #f5f6f8;
-      font-weight: 600;
-      color: #333;
-    }
-
-    table tr:nth-child(even) {
-      background-color: #fafafa;
-    }
-
-    table tr:hover {
-      background-color: #f1f1f1;
-      transition: 0.2s ease-in-out;
-    }
-
-    .empty-data {
-      text-align: center;
-      padding: 15px;
-      color: #888;
-      font-style: italic;
-    }
-
-    .btn {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .btn-edit {
-      background-color: #4caf50;
-      color: #fff;
-    }
-
-    .btn-delete {
-      background-color: #e74c3c;
-      color: #fff;
-    }
-
-    .btn-edit:hover {
-      background-color: #43a047;
-    }
-
-    .btn-delete:hover {
-      background-color: #d32f2f;
-    }
-  </style>
-
-  <div class="center-container">
-    <div class="text-center mb-4">
-      <h2 class="mt-3 fw-bold text-primary">Data Keluarga KK</h2>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="card-title fw-bold mb-0">Daftar Keluarga KK</h5>
-          <a href="{{ route('kependudukan.create') }}" class="btn btn-primary">
-            + Tambah KK
-          </a>
+  {{-- Card Data KK --}}
+  @if($keluarga->isEmpty())
+  <div class="alert alert-warning text-center">Belum ada data keluarga.</div>
+  @else
+  <div class="row g-4">
+    @foreach($keluarga as $item)
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 rounded-3">
+        <div class="card-body">
+          <h5 class="card-title text-success fw-bold"><i class="bi bi-house"></i> No KK: {{ $item->no_kk }}</h5>
+          <p class="card-text mb-1"><i class="bi bi-person-circle"></i> <strong>Kepala Keluarga:</strong> {{ $item->kepalaKeluarga->nama ?? '-' }}</p>
+          <p class="card-text mb-1"><i class="bi bi-geo-alt"></i> <strong>Alamat:</strong> {{ $item->alamat }}</p>
+          <p class="card-text mb-1"><i class="bi bi-signpost-split"></i> <strong>RT/RW:</strong> {{ $item->rt }}/{{ $item->rw }}</p>
         </div>
+        {{-- Tombol Edit --}}
+        <a href="{{ route('kependudukan.edit', $item) }}" class="btn btn-sm btn-warning me-2">
+          <i class="bi bi-pencil-square"></i> Edit
+        </a>
 
-        <table class="table table-bordered text-center align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>No</th>
-              <th>Nomor KK</th>
-              <th>Kepala Keluarga</th>
-              <th>Alamat</th>
-              <th>RT</th>
-              <th>RW</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            @forelse ($kk as $index => $item)
-            <tr>
-              <td>{{ $index + 1 }}</td>
-              <td>{{ $item->kk_nomor }}</td>
-              <td>{{ $item->kepala_keluarga_warga_id ? $item->kepalaKeluarga->nama : '-' }}</td>
-              <td>{{ $item->alamat }}</td>
-              <td>{{ $item->rt }}</td>
-              <td>{{ $item->rw }}</td>
-              <td>
-                <a href="{{ route('kependudukan.edit', $item->id) }}" class="btn btn-sm btn-edit">Edit</a>
+        {{-- Tombol Hapus --}}
+        <form action="{{ route('kependudukan.destroy', $item) }}" method="POST" class="d-inline">
+          @csrf
+          @method('DELETE')
+          <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">
+            <i class="bi bi-trash"></i> Hapus
+          </button>
+        </form>
 
-                <form action="{{ route('kependudukan.destroy', $item->id) }}" method="POST" style="display:inline;">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-sm btn-delete"
-                    onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                </form>
-              </td>
-            </tr>
-            @empty
-            <tr>
-              <td colspan="7" class="text-center text-muted">Belum ada data KK.</td>
-            </tr>
-            @endforelse
-          </tbody>
-        </table>
-
-        <div class="text-start mt-3">
-          <a href="{{ route('dashboard') }}" class="text-decoration-none">
-            ← Kembali ke Dashboard
-          </a>
-        </div>
       </div>
     </div>
   </div>
-  @endsection
-</body>
-
-</html>
+  @endforeach
+</div>
+@endif
+</div>
+@endsection

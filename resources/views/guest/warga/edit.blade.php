@@ -1,167 +1,66 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('guest.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data Warga</title>
-    <link rel="stylesheet" href="{{ asset('assets-guest/src/css/tailwind.css') }}">
-</head>
+@section('content')
+<div class="container py-5">
+  <h2 class="text-center mb-4 text-primary fw-bold">Edit Data Warga</h2>
 
-<body class="bg-gray-50 text-gray-800">
-
-    @extends('guest.dashboard')
-
-    @section('content')
-    <style>
-        /* ===== FORM STYLE ===== */
-        .form-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-top: 120px;
-            /* agar tidak nempel navbar */
-            background-color: #f8f9fa;
-        }
-
-        .form-card {
-            width: 100%;
-            max-width: 700px;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 40px 50px;
-        }
-
-        .form-card h2 {
-            text-align: center;
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #444;
-            text-align: left;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 25px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: 500;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-back {
-            background-color: #f3f4f6;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-
-        .btn-back:hover {
-            background-color: #e5e7eb;
-        }
-
-        .btn-submit {
-            background-color: #4f46e5;
-            color: #fff;
-            border: none;
-        }
-
-        .btn-submit:hover {
-            background-color: #4338ca;
-        }
-    </style>
-
-    <div class="form-wrapper">
-        <div class="form-card">
-            <h2>Edit Data Warga</h2>
-
-            <form action="{{ route('warga.update', $warga->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <div class="form-group">
-                    <label>No. KTP</label>
-                    <input type="text" name="no_ktp" value="{{ $warga->no_ktp }}" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input type="text" name="nama" value="{{ $warga->nama }}" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <select name="jenis_kelamin" required>
-                        <option value="">-- Pilih Jenis Kelamin --</option>
-                        <option value="Laki-laki" {{ $warga->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="Perempuan" {{ $warga->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Agama</label>
-                    <input type="text" name="agama" value="{{ $warga->agama }}">
-                </div>
-
-                <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input type="text" name="pekerjaan" value="{{ $warga->pekerjaan }}">
-                </div>
-
-                <div class="form-group">
-                    <label>Telepon</label>
-                    <input type="text" name="telepon" value="{{ $warga->telepon }}">
-                </div>
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" value="{{ $warga->email }}">
-                </div>
-
-                <div class="form-actions">
-                    <a href="{{ route('warga.index') }}" class="btn btn-back">← Kembali</a>
-                    <button type="submit" class="btn btn-submit">Perbarui Data</button>
-                </div>
-            </form>
-        </div>
+  @if($errors->any())
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        @foreach($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
     </div>
-    @endsection
-</body>
+  @endif
 
-</html>
+  <form action="{{ route('warga.update', $warga->warga_id) }}" method="POST" class="card shadow p-4 border-0 rounded-4">
+    @csrf
+    @method('PUT')
+
+    <div class="mb-3">
+      <label class="form-label">Nomor KTP</label>
+      <input type="text" name="no_ktp" class="form-control" value="{{ old('no_ktp', $warga->no_ktp) }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Nama Lengkap</label>
+      <input type="text" name="nama" class="form-control" value="{{ old('nama', $warga->nama) }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Jenis Kelamin</label>
+      <select name="jenis_kelamin" class="form-select">
+        <option value="Laki-laki" {{ $warga->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+        <option value="Perempuan" {{ $warga->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Agama</label>
+      <input type="text" name="agama" class="form-control" value="{{ old('agama', $warga->agama) }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Pekerjaan</label>
+      <input type="text" name="pekerjaan" class="form-control" value="{{ old('pekerjaan', $warga->pekerjaan) }}">
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">No. Telepon</label>
+        <input type="text" name="telp" class="form-control" value="{{ old('telp', $warga->telp) }}">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" value="{{ old('email', $warga->email) }}">
+      </div>
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-warning">Perbarui</button>
+      <a href="{{ route('warga.index') }}" class="btn btn-secondary">Kembali</a>
+    </div>
+  </form>
+</div>
+@endsection
